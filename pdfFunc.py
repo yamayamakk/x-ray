@@ -70,7 +70,7 @@ def calcNeutronB(qq, bList):
 
 # Calculating simulated T(r) pattern
 # Noting that exported T(r) is calculated using Lorch
-def calcPairFunction(qmin, qmax, dq, numAtomList, atomConc, bList, centerAtom, targetAtom, numCN, sigma, bondLength, delta=2):
+def calcPairFunction(qmin, qmax, dq, numAtomList, atomConc, bList, centerAtom, targetAtom, numCN, sigma, bondLength, delta=2, lorch=1):
     normConC = np.array(atomConc)/np.sum(atomConc)
     qq = np.linspace(qmin, qmax, int(round((qmax-qmin)/dq+1)))
 
@@ -84,10 +84,13 @@ def calcPairFunction(qmin, qmax, dq, numAtomList, atomConc, bList, centerAtom, t
     for i in range(len(tes)):
         ff2.append(np.sum(tes[i]) * np.sum(tes[i]))
 
+    if lorch==1:
+        iQ_PairFunction = delta * (normConC[centerAtom] * numCN * np.array(fList[centerAtom]) * np.array(fList[targetAtom]) / np.array(ff2)) * (np.exp(-0.5 * sigma * sigma * qq * qq)) * np.sin(bondLength * qq) / bondLength / qq
+        rr, gGr = calcGrLorch(qq, iQ_PairFunction, 0.01, 10, 0.01)
+    else:
+        iQ_PairFunction = delta * (normConC[centerAtom] * numCN * np.array(fList[centerAtom]) * np.array(fList[targetAtom]) / np.array(ff2)) * (np.exp(-0.5 * sigma * sigma * qq * qq)) * np.sin(bondLength * qq) / bondLength / qq
+        rr, gGr = calcGr(qq, iQ_PairFunction, 0.01, 10, 0.01)
 
-    iQ_PairFunction = delta * (normConC[centerAtom] * numCN * np.array(fList[centerAtom]) * np.array(fList[targetAtom]) / np.array(ff2)) * (np.exp(-0.5 * sigma * sigma * qq * qq)) * np.sin(bondLength * qq) / bondLength / qq
-    rr, gGr = calcGrLorch(qq, iQ_PairFunction, 0.01, 10, 0.01)
 
-    
     return qq, iQ_PairFunction, rr, gGr, fList
 
