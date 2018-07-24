@@ -10,19 +10,6 @@ import scipy.interpolate
 
 
 
-def calcForm(qq, numAtom, fData):
-    finalForm = []
-    for tempqq in qq:
-        tempForm = 0.00
-        tempForm = tempForm + fData[numAtom][1]*math.exp(-fData[numAtom][2]*math.pow((tempqq/4.0/math.pi), 2.0))
-        tempForm = tempForm + fData[numAtom][3]*math.exp(-fData[numAtom][4]*math.pow((tempqq/4.0/math.pi), 2.0))
-        tempForm = tempForm + fData[numAtom][5]*math.exp(-fData[numAtom][6]*math.pow((tempqq/4.0/math.pi), 2.0))
-        tempForm = tempForm + fData[numAtom][7]*math.exp(-fData[numAtom][8]*math.pow((tempqq/4.0/math.pi), 2.0))
-        tempForm = tempForm + fData[numAtom][9]*math.exp(-fData[numAtom][10]*math.pow((tempqq/4.0/math.pi), 2.0))
-        tempForm = tempForm + fData[numAtom][11]
-        finalForm.append(tempForm)
-    return finalForm
-
 
 
 def calcForm2(qq, numAtomList, fData):
@@ -53,30 +40,7 @@ def calcComp(qq, numAtom, cData):
     
     return finalComp
 
-def getParam(filename):
-    paramList = np.loadtxt(filename, delimiter=" ", dtype="float", skiprows=1)
-    atomList = []
-    concList = []
-    fpList = []
-    fppList = []
-    
-    tempfile = open(filename, "r")
-    energyX = float(tempfile.readline())
-    tempfile.close
-    
-    sumConcentration = 0.00
-    
-    for i in range(len(paramList)):
-        atomList.append(int(paramList[i][0]))
-        fpList.append(paramList[i][2])
-        fppList.append(paramList[i][3])
-        sumConcentration += paramList[i][1]
-    #print(sumConcentration)
-    
-    for i in range(len(paramList)):
-        concList.append(paramList[i][1]/sumConcentration)
-        
-    return energyX, atomList, concList, fpList, fppList
+
 
 def calcFseries(qq, atomList, concList, fdata, fpList, fppList):
 
