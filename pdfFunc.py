@@ -29,13 +29,13 @@ def calcForm2(qq, numAtomList, fData):
     finalForm = []
     for i in numAtomList:
         tempForm = fData[i-1][1]*np.exp(-fData[i-1][2]*np.power((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][3]*np.exp(-fData[i-1][4]*math.power((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][5]*np.exp(-fData[i-1][6]*math.power((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][7]*np.exp(-fData[i-1][8]*math.power((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][9]*np.exp(-fData[i-1][10]*math.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][3]*np.exp(-fData[i-1][4]*np.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][5]*np.exp(-fData[i-1][6]*np.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][7]*np.exp(-fData[i-1][8]*np.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][9]*np.exp(-fData[i-1][10]*np.power((qq/4.0/np.pi), 2.0))
         tempForm = tempForm + fData[i-1][11]
         finalForm.append(tempForm)
-    return formList
+    return finalForm
 
 
 
@@ -121,19 +121,7 @@ def convToQ(tt, energy):
     
     return qq
 
-def calcGr(qq, iQ, rmin, rmax, dr):
-    
-    rr = np.linspace(rmin, rmax, int(round(((rmax-rmin)/dr+1))))
-    gGr = []
-    
-    from scipy import integrate
-    
-    for i in range(len(rr)):
-        tempY = 2/math.pi*np.array(qq) * np.array(iQ) * np.sin(np.array(qq) * rr[i]) * np.sin(np.array(qq)*dr)/(np.array(qq) * dr)
-        tempGr = integrate.simps(tempY, qq)
-        gGr.append(tempGr)
-    
-    return rr, gGr
+
             
 def corrPol(tt, intensityRaw, pol):
     polList = pol + (1-pol) * np.cos(np.radians(tt)) * np.cos(np.radians(tt))
