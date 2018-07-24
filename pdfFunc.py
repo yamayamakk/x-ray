@@ -102,7 +102,7 @@ def calcCompton(compList, concList):
             tempSum += compList[j][i] * concList[j]
         compTotal.append(tempSum)
     
-   
+    return compTotal
 
 
 
