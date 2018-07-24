@@ -23,6 +23,22 @@ def calcForm(qq, numAtom, fData):
         finalForm.append(tempForm)
     return finalForm
 
+
+
+def calcForm(qq, numAtomList, fData):
+    finalForm = []
+    for i in numAtomList:
+        tempForm = fData[i-1][1]*np.exp(-fData[i-1][2]*np.pow((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][3]*np.exp(-fData[i-1][4]*math.pow((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][5]*np.exp(-fData[i-1][6]*math.pow((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][7]*np.exp(-fData[i-1][8]*math.pow((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][9]*np.exp(-fData[i-1][10]*math.pow((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][11]
+        finalForm.append(tempForm)
+    return formList
+
+
+
 def calcComp(qq, numAtom, cData):
     finalComp = []
     for i in range(len(qq)):
