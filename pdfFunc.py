@@ -25,14 +25,14 @@ def calcForm(qq, numAtom, fData):
 
 
 
-def calcForm(qq, numAtomList, fData):
+def calcForm2(qq, numAtomList, fData):
     finalForm = []
     for i in numAtomList:
-        tempForm = fData[i-1][1]*np.exp(-fData[i-1][2]*np.pow((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][3]*np.exp(-fData[i-1][4]*math.pow((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][5]*np.exp(-fData[i-1][6]*math.pow((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][7]*np.exp(-fData[i-1][8]*math.pow((qq/4.0/np.pi), 2.0))
-        tempForm = tempForm + fData[i-1][9]*np.exp(-fData[i-1][10]*math.pow((qq/4.0/np.pi), 2.0))
+        tempForm = fData[i-1][1]*np.exp(-fData[i-1][2]*np.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][3]*np.exp(-fData[i-1][4]*math.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][5]*np.exp(-fData[i-1][6]*math.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][7]*np.exp(-fData[i-1][8]*math.power((qq/4.0/np.pi), 2.0))
+        tempForm = tempForm + fData[i-1][9]*np.exp(-fData[i-1][10]*math.power((qq/4.0/np.pi), 2.0))
         tempForm = tempForm + fData[i-1][11]
         finalForm.append(tempForm)
     return formList
@@ -81,7 +81,8 @@ def getParam(filename):
 def calcFseries(qq, atomList, concList, fdata, fpList, fppList):
 
 
-    formList = calcForm(qq, atomList, fdata)
+    formList = calcForm2(qq, atomList, fdata)
+    concList = np.array(concList) / np.sum(concList)
 
     form2sum = [] # <f2>
     formSum2 = [] # <f>2
