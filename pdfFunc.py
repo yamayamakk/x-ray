@@ -62,7 +62,10 @@ def getParam(filename):
         
     return energyX, atomList, concList, fpList, fppList
 
-def calcFseries(qq, atomList, concList, formList, fpList, fppList):
+def calcFseries(qq, atomList, concList, fdata, fpList, fppList):
+
+
+    formList = calcForm(qq, atomList, fdata)
 
     form2sum = [] # <f2>
     formSum2 = [] # <f>2
