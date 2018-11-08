@@ -133,11 +133,11 @@ def calcGrLorch(qq, iQ, rmin, rmax, dr):
     
     for i in range(len(rr)):
         tempY = 2/math.pi * np.array(qq) * np.array(iQ) * np.sin(np.array(qq) * rr[i]) * np.sin(np.array(qq) * delta_r) / (np.array(qq) * delta_r)
-        tempGr = integrate.simps(tempY, qq)
-        gGr.append(tempGr)
+        #tempGr = integrate.simps(tempY, qq)
+        #gGr.append(tempGr)
 
-        #tempGr = integrate.cumtrapz(tempY, qq)
-        #gGr.append(tempGr[-1])
+        tempGr = integrate.cumtrapz(tempY, qq)
+        gGr.append(tempGr[-1])
     
     return rr, gGr
 
