@@ -8,7 +8,28 @@ import matplotlib
 import matplotlib.pyplot as plt
 import scipy.interpolate
 
+def calcFpFpp(atomList, energyX):
+    fpfppRaw = []
 
+    for i in range(len(atomList)):
+        nameFP = "./afactor/af_" + str(atomList[i]) + ".dat"
+        tes = np.loadtxt(nameFP).T
+        fpfppRaw.append(tes)
+
+  
+    fpList = []
+    fppList = []
+
+
+    for i in range(len(atomList)):
+        f1 = interpolate.interp1d(fpfppRaw[i][0], fpfppRaw[i][1])
+        f2 = interpolate.interp1d(fpfppRaw[i][0], fpfppRaw[i][2])
+        tempfp = f1(energyX)
+        tempfpp = f2(energyX)
+        fpList.append(tempfp)
+        fppList.append(tempfpp)
+  
+    return np.array(fpList), np.array(fppList)
 
 
 
