@@ -6,7 +6,7 @@ import matplotlib
 
 
 import matplotlib.pyplot as plt
-import scipy.interpolate as interpolate
+from scipy import interpolate
 
 def calcFpFpp(atomList, energyX):
     fpfppRaw = []
