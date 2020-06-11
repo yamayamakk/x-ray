@@ -8,6 +8,17 @@ import matplotlib
 import matplotlib.pyplot as plt
 from scipy import interpolate
 
+
+def calcAbs(atomList, energyX):
+    absL = []
+    for i in range(len(atomList)):
+        fname = "./abs/absorp_" + str(atomL[i]) + ".dat"
+        ene, vabs = np.loadtxt(fname).T
+        f1 = interpolate.interp1d(ene, vabs)
+        absX = f1(energyX/1000)
+        absL.append(absX)
+    return absL
+
 def calcFpFpp(atomList, energyX):
     fpfppRaw = []
 
