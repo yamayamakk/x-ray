@@ -12,7 +12,7 @@ from scipy import interpolate
 def calcAbs(atomList, energyX):
     absL = []
     for i in range(len(atomList)):
-        fname = "./abs/absorp_" + str(atomL[i]) + ".dat"
+        fname = "./abs/absorp_" + str(atomList[i]) + ".dat"
         ene, vabs = np.loadtxt(fname).T
         f1 = interpolate.interp1d(ene, vabs)
         absX = f1(energyX/1000)
