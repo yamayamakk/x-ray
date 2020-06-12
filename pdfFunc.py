@@ -8,20 +8,28 @@ import matplotlib
 import matplotlib.pyplot as plt
 from scipy import interpolate
 
-
 def GetSasakiF1F2(atomList, energyX):
-    absL = []
+    fpL = []
+    fppL = []
     for i in range(len(atomList)):
         if atomList[i] == 1 or atomList[i] == 2 or atomList[i] ==3:
-            tempAbs = [0.0, 0.0]
-            absL.append(tempAbs)
+            fpL.append(0.0)
+            fppL.appen(0.0)
+            
         else:
             fname = "./sasakif1f2/f1f2_" + str(atomList[i]) + ".dat"
-            ene, vabs = np.loadtxt(fname, delimiter=" ").T
-            f1 = interpolate.interp1d(ene, vabs)
-            absX = f1(energyX)
-            absL.append(absX)
-    return absL
+            ene, vf1, vf2 = np.loadtxt(fname, delimiter=" ").T
+            
+            f1 = interpolate.interp1d(ene, vf1)
+            f2 = interpolate.interp1d(ene, vf2)
+            fp = f1(energyX)
+            fpp = f2(energyX)
+
+            fpL.append(fp)
+            fppL.append(fpp)            
+            
+    return  fpL, fppL
+
 
 
 def calcAbs(atomList, energyX):
