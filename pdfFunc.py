@@ -17,7 +17,7 @@ def GetSasakiF1F2(atomList, energyX):
             absL.append(tempAbs)
         else:
             fname = "./sasakif1f2/f1f2_" + str(atomList[i]) + ".dat"
-            ene, vabs = np.loadtxt(fname).T
+            ene, vabs = np.loadtxt(fname, delimiter=" ").T
             f1 = interpolate.interp1d(ene, vabs)
             absX = f1(energyX)
             absL.append(absX)
