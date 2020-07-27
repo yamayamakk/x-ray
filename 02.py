@@ -8,6 +8,11 @@ import matplotlib
 import matplotlib.pyplot as plt
 from scipy import interpolate
 
+
+
+
+
+
 def GetSasakiF1F2(atomList, energyX):
     fpL = []
     fppL = []
@@ -232,3 +237,24 @@ def calcPairFunction(qmin, qmax, dq, numAtomList, atomConc, bList, centerAtom, t
 
     return qq, iQ_PairFunction, rr, gGr, fList
 
+
+
+
+
+
+
+
+qq, iQ = np.loadtxt("Sq_ip.txt", delimiter = "\t").T
+
+dr = 0.01
+rmax = 20
+rmin = 0.1
+
+print iQ
+
+rr, gGr = calcGrLorch(qq, iQ, rmin, rmax, dr)
+
+
+for i in range(len(gGr)):
+    print str(rr[i]) + "\t" + str(gGr[i])
+    
